@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll-Driven Animations 兼容性演示</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true">
+  <div class="scroll-progress__bar" id="progress-bar"></div>
+</div>
+
+<aside class="panel" id="panel">
+  <h2 class="panel__title">控制面板</h2>
+
+  <div class="panel__row">
+    <span class="panel__label">当前方案</span>
+    <strong class="mode-badge" id="mode-badge">检测中…</strong>
+  </div>
+  <div class="panel__row">
+    <span class="panel__label">方案原因</span>
+    <ul class="reasons" id="reasons"></ul>
+  </div>
+
+  <div class="switcher" role="group" aria-label="方案切换">
+    <button type="button" data-mode="auto" class="switcher__btn is-active">自动</button>
+    <button type="button" data-mode="native" class="switcher__btn">原生 SDA</button>
+    <button type="button" data-mode="fallback" class="switcher__btn">降级 JS</button>
+  </div>
+  <p class="panel__hint" id="switch-hint"></p>
+
+  <h3 class="panel__subtitle">支持性检测</h3>
+  <table class="support-table" id="support-table"></table>
+
+  <h3 class="panel__subtitle">性能对比</h3>
+  <div class="perf-current" id="perf-current">FPS：—</div>
+  <table class="perf-table" id="perf-compare">
+    <thead>
+      <tr><th>方案</th><th>平均 FPS</th><th>卡顿帧</th><th>长任务</th><th>长任务耗时</th></tr>
+    </thead>
+    <tbody>
+      <tr data-perf="native"><td>原生 SDA</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr data-perf="fallback"><td>降级 JS</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+</aside>
+
+<header class="hero">
+  <h1>Scroll-Driven Animations</h1>
+  <p>滚动进度条 · 视差 · 逐帧 · 粘性效果 —— 原生与降级方案实时对照</p>
+  <p class="hero__scroll">向下滚动查看各动画 ↓</p>
+</header>
+
+<section class="section parallax-section">
+  <h2 class="section__title">视差 Parallax</h2>
+  <p class="parallax-ghost" data-parallax data-amp="180">SCROLL</p>
+  <div class="parallax-grid">
+    <div class="parallax-card" data-parallax data-amp="40"><span>慢速层</span></div>
+    <div class="parallax-card" data-parallax data-amp="90"><span>中速层</span></div>
+    <div class="parallax-card" data-parallax data-amp="150"><span>快速层</span></div>
+  </div>
+</section>
+
+<section class="section frames-section" id="frames-section">
+  <div class="frames-stage">
+    <h2 class="section__title">逐帧 Frame-by-Frame</h2>
+    <div class="frame-strip" id="frame-strip" role="img" aria-label="逐帧动画"></div>
+    <p class="section__note">滚动经过本区域时，精灵图按帧推进</p>
+  </div>
+</section>
+
+<section class="section sticky-section" id="sticky-section">
+  <div class="sticky-viewport">
+    <div class="sticky-card" id="sticky-card">
+      <h2 class="section__title">粘性 Sticky</h2>
+      <p>容器 300vh，卡片吸附在视口内随滚动缩放旋转</p>
+      <div class="sticky-meter"><div class="sticky-meter__fill" id="sticky-meter-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section filler">
+  <h2 class="section__title">结尾</h2>
+  <p>继续滚动观察顶部进度条与面板中的性能数据。</p>
+  <p>切换右侧面板中的方案，对比原生 Scroll-Driven Animations 与 IntersectionObserver + requestAnimationFrame 降级方案的流畅度。</p>
+</section>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
