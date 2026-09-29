@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll-Driven Animations 兼容性演示</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="progress-track" id="progressTrack">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<aside class="panel" id="panel">
+  <h1>滚动动画控制台</h1>
+
+  <section>
+    <h2>当前方案</h2>
+    <div class="mode-row">
+      <span class="mode-badge" id="modeBadge">初始化…</span>
+    </div>
+    <div class="switcher" role="group" aria-label="方案切换">
+      <button type="button" data-mode="auto" class="active">自动</button>
+      <button type="button" data-mode="native">原生 SDA</button>
+      <button type="button" data-mode="fallback">降级方案</button>
+    </div>
+    <ul class="effect-status" id="effectStatus"></ul>
+    <p class="correction" id="correctionNote" hidden></p>
+  </section>
+
+  <section>
+    <h2>能力检测</h2>
+    <ul class="support-matrix" id="supportMatrix"></ul>
+  </section>
+
+  <section>
+    <h2>性能（当前会话）</h2>
+    <dl class="perf-grid" id="perfLive">
+      <div><dt>FPS</dt><dd data-k="fps">–</dd></div>
+      <div><dt>平均帧耗时</dt><dd data-k="avgFrame">–</dd></div>
+      <div><dt>最差帧</dt><dd data-k="worst">–</dd></div>
+      <div><dt>掉帧</dt><dd data-k="dropped">–</dd></div>
+      <div><dt>卡顿 &gt;50ms</dt><dd data-k="jank">–</dd></div>
+      <div><dt>长任务</dt><dd data-k="longtasks">–</dd></div>
+    </dl>
+    <h2>性能对比（切换时记录）</h2>
+    <table class="perf-table" id="perfTable">
+      <thead>
+        <tr><th>方案</th><th>FPS</th><th>帧耗时</th><th>掉帧</th><th>长任务</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</aside>
+
+<main>
+  <section class="hero">
+    <h2>Scroll-Driven Animations</h2>
+    <p>原生支持时走 <code>scroll()</code> / <code>view()</code> 时间线；不支持时自动降级为 IntersectionObserver + requestAnimationFrame，视觉表现保持一致。向下滚动查看四种效果。</p>
+    <p class="hint">↓ 继续滚动</p>
+  </section>
+
+  <section class="parallax" id="parallaxSection">
+    <div class="layer layer-back"></div>
+    <div class="layer layer-mid"></div>
+    <div class="layer layer-front"></div>
+    <h2 class="section-title">视差 Parallax</h2>
+  </section>
+
+  <section class="frames" id="frameSection">
+    <div class="frame-stage">
+      <div class="frame-sprite" id="frameSprite"></div>
+      <p class="frame-label" id="frameLabel">第 1 / 12 帧</p>
+    </div>
+    <h2 class="section-title">逐帧 Frame-by-Frame</h2>
+  </section>
+
+  <section class="sticky-wrap" id="stickySection">
+    <div class="sticky-box">
+      <div class="sticky-card" id="stickyCard">STICKY</div>
+      <p class="sticky-label" id="stickyLabel">0%</p>
+    </div>
+  </section>
+
+  <section class="outro">
+    <h2>结束</h2>
+    <p>顶部进度条、视差、逐帧、粘性卡片均由当前选中的方案驱动。可在右上角控制台手动切换方案并对比性能。</p>
+  </section>
+</main>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
